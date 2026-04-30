@@ -25,11 +25,14 @@
   --shadow: 0 2px 16px rgba(26,39,68,0.10);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; background: var(--navy2); }
 body {
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background: var(--cream);
+  background: var(--navy2);
   color: var(--text);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* HEADER */
@@ -37,7 +40,10 @@ header {
   background: var(--navy);
   padding: 1rem 1.5rem;
   border-bottom: 3px solid var(--gold);
-  position: static; /* iPad-safe */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 12px rgba(8, 18, 38, 0.22);
 }
 .header-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 header h1 {
@@ -84,7 +90,14 @@ header h1 span { color: var(--gold); }
 .arrow-label { font-size: 1rem; color: var(--gold); }
 
 /* MAIN */
-main { max-width: 580px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+main {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  padding: clamp(1rem, 2vw, 1.5rem) clamp(0.85rem, 2.5vw, 1.25rem) 3rem;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
 
 /* TIMER CONTROL */
 .timer-row {
@@ -266,6 +279,19 @@ main { max-width: 580px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
 }
 .section-select option { background: #1a2744; color: #ffffff; }
 .section-count { font-size: 0.68rem; color: #c9a84c; font-weight: 500; margin-left: 4px; white-space: nowrap; }
+
+@media (max-width: 720px) {
+  header { padding: 0.85rem 1rem; }
+  .lang-bar, .section-bar { padding-left: 1rem; padding-right: 1rem; }
+  .header-top { align-items: flex-start; }
+  header h1 { font-size: 1rem; }
+  .header-sub { font-size: 0.64rem; line-height: 1.3; }
+  .version-badge { margin-top: 2px; }
+  .card { padding: 1.1rem; border-radius: 12px; }
+  .prompt-text { font-size: clamp(1.06rem, 4.6vw, 1.24rem); }
+  .rf-timer { font-size: clamp(2rem, 10vw, 2.7rem); }
+  .btn { flex: 1 1 175px; min-height: 42px; }
+}
 </style>
 </head>
 <body>
